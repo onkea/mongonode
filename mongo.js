@@ -9,9 +9,18 @@ MongoClient.connect(url, function(err, db) {
   var dbo = db.db("domains");
   var query = { url: "02.io" };
 var query = "";  
-dbo.collection("urls").find(query).limit(100).toArray(function(err, result) {
+var i = 0;
+dbo.collection("urls").find(query).limit(3).toArray(function(err, result) {
     if (err) throw err;
-    console.log(result);
+   // console.log(result);
+   console.log(result[i]['url']);
+   i++;
+
+dbo.collection('urls').insert({date: new Date()}, function(err, r) {
+    console.log("query executed");
+});
     db.close();
   });
 });
+
+
